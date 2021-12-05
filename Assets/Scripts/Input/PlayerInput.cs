@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
 {
     public event UnityAction jumpEvent = delegate { };
+    public event UnityAction<Vector2> movementEvent = delegate { };
 
     private GameInput _gameInput;
 
@@ -29,6 +30,11 @@ public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
     {
         if (context.phase.Equals(InputActionPhase.Performed))
             jumpEvent.Invoke();
+    }
+
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        movementEvent.Invoke(context.ReadValue<Vector2>());
     }
 
     public void EnableGameplayInput()

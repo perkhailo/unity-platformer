@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private PlayerMovement _playerMovement;
+
+    private void Awake()
+    {
+        if (!_playerMovement)
+            _playerMovement = gameObject.GetComponent<PlayerMovement>();
+    }
 
     private void OnEnable()
     {
-        playerInput.jumpEvent += Jump;
+        if (_playerInput)
+        {
+            _playerInput.jumpEvent += Jump;
+            _playerInput.movementEvent += Movement;
+        }
     }
 
     private void OnDisable()
     {
-        
+        _playerInput.jumpEvent -= Jump;
     }
 
     private void Jump()
     {
         
+    }
+
+    private void Movement(Vector2 value)
+    {
+
     }
 }
