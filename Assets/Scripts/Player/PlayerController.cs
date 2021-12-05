@@ -1,10 +1,22 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public void Start()
+    [SerializeField] private PlayerInput playerInput;
+
+    private void OnEnable()
+    {
+        playerInput.jumpEvent += Jump;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    private void Jump()
     {
         
     }
