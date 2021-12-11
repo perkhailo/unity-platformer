@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
 public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
 {
+    public event UnityAction interactEvent = delegate { };
     public event UnityAction jumpEvent = delegate { };
     public event UnityAction<Vector2> movementEvent = delegate { };
 
@@ -23,7 +24,7 @@ public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
 
     private void OnDisable()
     {
-        DisableGameplayInput();
+        DisableAllInputs();
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -37,6 +38,12 @@ public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
         movementEvent.Invoke(context.ReadValue<Vector2>());
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase.Equals(InputActionPhase.Performed))
+            interactEvent.Invoke();
+    }
+
     public void EnableGameplayInput()
     {
         _gameInput.Gameplay.Enable();
@@ -45,5 +52,10 @@ public class PlayerInput : ScriptableObject, GameInput.IGameplayActions
     public void DisableGameplayInput()
     {
         _gameInput.Gameplay.Disable();
+    }
+
+    public void DisableAllInputs()
+    {
+        DisableGameplayInput();
     }
 }

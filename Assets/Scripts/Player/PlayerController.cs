@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField]
+    private PlayerInput _playerInput;
 
     private PlayerMovement _playerMovement;
 
@@ -30,11 +32,11 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        
+        _playerMovement.Jump();
     }
 
     private void Movement(Vector2 value)
     {
-
+        _playerMovement.movementValue = value;
     }
 }
