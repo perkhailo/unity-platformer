@@ -2,18 +2,20 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerMovement), typeof(SpriteRenderer), typeof(FlipFace))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private PlayerInput _playerInput;
-
+    private FlipFace _flipFace;
     private PlayerMovement _playerMovement;
 
     private void Awake()
     {
         if (!_playerMovement)
             _playerMovement = GetComponent<PlayerMovement>();
+        if (!_flipFace)
+            _flipFace = GetComponent<FlipFace>();
     }
 
     private void OnEnable()
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private void Movement(Vector2 value)
     {
-        _playerMovement.movementValue = value;
+        _playerMovement.MovementValue = value.x;
+        _flipFace.DirectionInput = value.x;
     }
 }

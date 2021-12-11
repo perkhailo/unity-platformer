@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4334957649092181587}
   - component: {fileID: 4334957649092181584}
+  - component: {fileID: 1937098811}
   - component: {fileID: 4334957649092181599}
   - component: {fileID: 4334957649092181596}
   - component: {fileID: 4334957649092181597}
@@ -86,6 +87,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1937098811
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4334957649092181585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e836e885e23e614da4c2d7df4b348f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &4334957649092181599
 Rigidbody2D:
   serializedVersion: 4
@@ -101,7 +121,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 2
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -148,3 +168,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84d13ba2479e6f46a39b1d07af9483a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 8
+  _jumpForce: 5

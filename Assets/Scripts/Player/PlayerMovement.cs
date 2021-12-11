@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 5f;
+    private float _speed = 1f;
     [SerializeField]
-    private float _jumpForce = 5f;
+    private float _jumpForce = 1f;
 
     private Rigidbody2D _rigidbody2D;
 
-    public Vector2 movementValue { private get; set; }
+    public float MovementValue { get; set; }
 
     private void Awake()
     {
@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        
+        _rigidbody2D.velocity = new Vector2(MovementValue * _speed, _rigidbody2D.velocity.y);
     }
 }
