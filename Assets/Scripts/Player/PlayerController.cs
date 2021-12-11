@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private PlayerMovement _playerMovement;
+
+    private PlayerMovement _playerMovement;
 
     private void Awake()
     {
         if (!_playerMovement)
-            _playerMovement = gameObject.GetComponent<PlayerMovement>();
+            _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
