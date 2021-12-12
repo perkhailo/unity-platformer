@@ -23,12 +23,14 @@ public class PlayerMovement : AbstractPhysicsBehaviour
     {
         base.Update();
 
-        base._rigidbody2D.velocity = new Vector2(_moveDirection.x * _speed, base._rigidbody2D.velocity.y);
+        if (base.isGrounded)
+            base._rigidbody2D.velocity = new Vector2(_moveDirection.x * _speed, base._rigidbody2D.velocity.y);
     }
 
     public void Jump()
     {
-        base._rigidbody2D.AddForce(transform.up * (_jumpForce * base._rigidbody2D.gravityScale), ForceMode2D.Impulse);
+        if (base.isGrounded)
+            base._rigidbody2D.AddForce(transform.up * (_jumpForce * base._rigidbody2D.gravityScale), ForceMode2D.Impulse);
     }
 
     public void Move(Vector2 direction)

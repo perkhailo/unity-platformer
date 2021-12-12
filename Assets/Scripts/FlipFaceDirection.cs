@@ -27,14 +27,14 @@ public class FlipFaceDirection : AbstractPhysicsBehaviour
 
     private void SetFaceDirection()
     {
-        if (horizontalDirectionMovement.Equals(DirectionType.Positive))
+        if (base._horizontalDirectionMovement.Equals(DirectionType.Positive))
         {
             if (faceDirectionOrigin.Equals(DirectionType.Positive))
                 FlipX(false);
             if (faceDirectionOrigin.Equals(DirectionType.Negative))
                 FlipX(true);
         }
-        if (horizontalDirectionMovement.Equals(DirectionType.Negative))
+        if (base._horizontalDirectionMovement.Equals(DirectionType.Negative))
         {
             if (faceDirectionOrigin.Equals(DirectionType.Positive))
                 FlipX(true);
