@@ -123,6 +123,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &150223280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4334957649092181585, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
+  m_PrefabInstance: {fileID: 4334957649888392805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &150223288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150223280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac38f0e36f366fc4280dd4c720ab56ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faceDirectionOrigin: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +790,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 935265139}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6a1bce4a902acb74a97e844ae8351fb9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1008,17 +1026,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3566808314707427651, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
-      propertyPath: faceDirection
+    - target: {fileID: 1937098811, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181584, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
-      propertyPath: m_FlipX
-      value: 0
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181585, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334957649092181586, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
+      propertyPath: _jumpForce
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181587, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
       propertyPath: m_RootOrder
@@ -1062,14 +1084,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181587, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334957649092181597, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
-      propertyPath: faceState.flip
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334957649092181597, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
-      propertyPath: faceState.faceTo
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

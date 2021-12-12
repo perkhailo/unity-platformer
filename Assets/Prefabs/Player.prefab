@@ -170,3 +170,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 8
   _jumpForce: 5
+  faceDirectionOrigin: 1

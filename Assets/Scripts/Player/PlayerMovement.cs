@@ -2,87 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DirectionType
-{
-    Left,
-    Right
-}
-
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : AbstractPhysicsBehaviour
 {
     [SerializeField]
     private float _speed = 1f;
     [SerializeField]
     private float _jumpForce = 1f;
 
-    private Rigidbody2D _rigidbody2D;
-    private SpriteRenderer _spriteRenderer;
+    private Vector2 _moveDirection;
 
-    public float MovementValue { get; set; }
-    [SerializeField]
-    public DirectionType directionMovement { get; set; }
-    [SerializeField]
-    DirectionType faceDirectionOrigin = DirectionType.Right;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (!_rigidbody2D)
-            _rigidbody2D = GetComponent<Rigidbody2D>() as Rigidbody2D;
+        base.Awake();
 
-        if (!_rigidbody2D.bodyType.Equals(RigidbodyType2D.Dynamic))
-            _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-
-        if (!_spriteRenderer)
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+        if (!base._rigidbody2D.bodyType.Equals(RigidbodyType2D.Dynamic))
+            base._rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    private void Start()
+    protected override void Update()
     {
-        directionMovement = faceDirectionOrigin;
+        base.Update();
+
+        base._rigidbody2D.velocity = new Vector2(_moveDirection.x * _speed, base._rigidbody2D.velocity.y);
     }
 
     public void Jump()
     {
-        
+        base._rigidbody2D.AddForce(transform.up * (_jumpForce * base._rigidbody2D.gravityScale), ForceMode2D.Impulse);
     }
 
-    private void Update()
+    public void Move(Vector2 direction)
     {
-        _rigidbody2D.velocity = new Vector2(MovementValue * _speed, _rigidbody2D.velocity.y);
-
-        SetDirectionMovement(MovementValue);
-        SetFaceDirection(faceDirectionOrigin);
-    }
-
-    private void SetFaceDirection(DirectionType direction)
-    {
-        if (direction.Equals(DirectionType.Right))
-        {
-            if (directionMovement.Equals(DirectionType.Right))
-                FlipX(false);
-            if (directionMovement.Equals(DirectionType.Left))
-                FlipX(true);
-        }
-        if (direction.Equals(DirectionType.Left))
-        {
-            if (directionMovement.Equals(DirectionType.Right))
-                FlipX(true);
-            if (directionMovement.Equals(DirectionType.Left))
-                FlipX(false);
-        }
-    }
-
-    private void SetDirectionMovement(float value)
-    {
-        if (value > 0)
-            directionMovement = DirectionType.Right;
-        if (value < 0)
-            directionMovement = DirectionType.Left;
-    }
-
-    private void FlipX(bool value)
-    {
-        _spriteRenderer.flipX = value;
+        _moveDirection = direction;
     }
 }

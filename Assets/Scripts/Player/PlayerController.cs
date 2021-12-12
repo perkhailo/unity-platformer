@@ -36,6 +36,6 @@ public class PlayerController : MonoBehaviour
 
     private void Movement(Vector2 value)
     {
-        _playerMovement.MovementValue = value.x;
+        _playerMovement.Move(value);
     }
 }
