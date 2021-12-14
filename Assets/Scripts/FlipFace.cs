@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(PhysicsBehaviour))]
-public class FlipFaceDirection : MonoBehaviour
+public class FlipFace : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteRenderer 
