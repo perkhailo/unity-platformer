@@ -2,49 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class FlipFaceDirection : AbstractPhysicsBehaviour
+[RequireComponent(typeof(SpriteRenderer), typeof(PhysicsBehaviour))]
+public class FlipFaceDirection : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer SpriteRenderer 
+    { 
+        get => _spriteRenderer; 
+        set => _spriteRenderer = value; 
+    }
+    public PhysicsBehaviour PhysicsBehaviour { get; set; }
 
     [SerializeField]
     DirectionType faceDirectionOrigin = DirectionType.Positive;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        if (!_spriteRenderer)
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+        if (!SpriteRenderer)
+            SpriteRenderer = GetComponent<SpriteRenderer>();
+        if (!PhysicsBehaviour)
+            PhysicsBehaviour = GetComponent<PhysicsBehaviour>();
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
-        SetFaceDirection();
+        SetFaceDirection(PhysicsBehaviour.HorizontalDirectionMovement, faceDirectionOrigin, ref _spriteRenderer);
     }
 
-    private void SetFaceDirection()
+    private void SetFaceDirection(DirectionType horizontalDirectionMovement, DirectionType faceDirectio, ref SpriteRenderer spriteRenderer)
     {
-        if (base._horizontalDirectionMovement.Equals(DirectionType.Positive))
+        if (horizontalDirectionMovement.Equals(DirectionType.Positive))
         {
-            if (faceDirectionOrigin.Equals(DirectionType.Positive))
-                FlipX(false);
-            if (faceDirectionOrigin.Equals(DirectionType.Negative))
-                FlipX(true);
+            if (faceDirectio.Equals(DirectionType.Negative))
+                spriteRenderer.flipX = true;
+            else
+                spriteRenderer.flipX = false;
         }
-        if (base._horizontalDirectionMovement.Equals(DirectionType.Negative))
-        {
-            if (faceDirectionOrigin.Equals(DirectionType.Positive))
-                FlipX(true);
-            if (faceDirectionOrigin.Equals(DirectionType.Negative))
-                FlipX(false);
-        }
-    }
 
-    private void FlipX(bool value)
-    {
-        _spriteRenderer.flipX = value;
+        if (horizontalDirectionMovement.Equals(DirectionType.Negative))
+        {
+            if (faceDirectio.Equals(DirectionType.Positive))
+                spriteRenderer.flipX = true;
+            else
+                spriteRenderer.flipX = false;
+        }
     }
 }
