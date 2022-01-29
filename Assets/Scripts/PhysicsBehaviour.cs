@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,12 @@ public class PhysicsBehaviour : MonoBehaviour
     public DirectionType HorizontalDirectionMovement { get; set; }
     public DirectionType VerticalDirectionMovement { get; set; }
     public bool IsGrounded { get; set; } = false;
+    public event Action<Collision2D> GroundCollisionEnterNotify;
+    public bool isRunning { get; set; } = false;
+    private bool isCalledStartRunnigCallback { get; set; } = false;
+    public event Action OnStartRunningNotify;
+    private bool isCalledStopRunnigCallback { get; set; } = false;
+    public event Action OnStopRunningNotify;
 
     [SerializeField]
     private LayerMask _ground;
@@ -29,7 +36,7 @@ public class PhysicsBehaviour : MonoBehaviour
             Collider2D = GetComponent<Collider2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Vector2 currentMovementDirectory = Rigidbody2D.velocity;
 
@@ -37,6 +44,38 @@ public class PhysicsBehaviour : MonoBehaviour
         VerticalDirectionMovement = GetDirectionMovement((int)currentMovementDirectory.y);
 
         IsGrounded = Collider2D.IsTouchingLayers(_ground);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!HorizontalDirectionMovement.Equals(DirectionType.Static))
+        {
+            isRunning = true;
+            isCalledStopRunnigCallback = false;
+        }
+
+        if (HorizontalDirectionMovement.Equals(DirectionType.Static))
+        {
+            isRunning = false;
+            isCalledStartRunnigCallback = false;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (isRunning && !isCalledStartRunnigCallback)
+        {
+            if (OnStartRunningNotify != null)
+                OnStartRunningNotify();
+            isCalledStartRunnigCallback = true;
+        }
+
+        if (!isRunning && !isCalledStopRunnigCallback)
+        {
+            if (OnStopRunningNotify != null)
+                OnStopRunningNotify();
+            isCalledStopRunnigCallback = true;
+        }
     }
 
     private DirectionType GetDirectionMovement(int velocity)
@@ -55,5 +94,12 @@ public class PhysicsBehaviour : MonoBehaviour
                 break;
         }
         return directionType;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((_ground.value & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+            if (GroundCollisionEnterNotify != null)
+                GroundCollisionEnterNotify(collision);
     }
 }

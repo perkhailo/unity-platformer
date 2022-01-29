@@ -150,7 +150,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.20000002, g: 0.19607845, b: 0.2392157, a: 0}
+  m_BackGroundColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1008,9 +1008,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 335433383115553791, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
+      propertyPath: _delayIdleAnimation
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181585, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334957649092181586, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
+      propertyPath: _jumpForce
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4334957649092181587, guid: 9bfd1e6bd3c959347b0606dba3647c3c, type: 3}
       propertyPath: m_RootOrder
